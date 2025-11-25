@@ -49,10 +49,13 @@ Sistema de gerenciamento de funcionários e dependentes desenvolvido para o Depa
 
 ## 🛠️ Tecnologias Utilizadas
 
-- Java SE 8 ou superior
 - Swing (JOptionPane) para interface gráfica
 - Java Collections Framework
 - Java I/O para geração de arquivos
+- java version "21.0.9" 2025-10-21 LTS
+- Java(TM) SE Runtime Environment (build 21.0.9+7-LTS-338)
+- Java HotSpot(TM) 64-Bit Server VM (build 21.0.9+7-LTS-338, mixed mode, sharing)
+- Extension Pack for Java (0.30.5)
 
 ## 📂 Estrutura do Projeto
 
