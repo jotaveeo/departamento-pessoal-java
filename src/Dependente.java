@@ -8,8 +8,9 @@ public class Dependente {
 
     /**
      * Construtor para criar um novo dependente.
+     * 
      * @param funcionario Funcionário responsável pelo dependente
-     * @param nome Nome do dependente
+     * @param nome        Nome do dependente
      */
     public Dependente(Funcionario funcionario, String nome) {
         this.funcionario = funcionario;
@@ -18,6 +19,7 @@ public class Dependente {
 
     /**
      * Obtém o funcionário responsável pelo dependente.
+     * 
      * @return Funcionário responsável
      */
     public Funcionario getFuncionario() {
@@ -26,6 +28,7 @@ public class Dependente {
 
     /**
      * Define o funcionário responsável pelo dependente.
+     * 
      * @param funcionario Novo funcionário responsável
      */
     public void setFuncionario(Funcionario funcionario) {
@@ -34,6 +37,7 @@ public class Dependente {
 
     /**
      * Obtém o nome do dependente.
+     * 
      * @return Nome do dependente
      */
     public String getNome() {
@@ -42,6 +46,7 @@ public class Dependente {
 
     /**
      * Define o nome do dependente.
+     * 
      * @param nome Novo nome do dependente
      */
     public void setNome(String nome) {
