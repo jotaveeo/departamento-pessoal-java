@@ -31,9 +31,9 @@ public class CadastroFuncionario {
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (salario < 0) {
+        if (salario <= 0) {
             JOptionPane.showMessageDialog(null, 
-                "Erro: Salário não pode ser negativo.",
+                "Erro: Salário deve ser maior que zero.",
                 "Erro de Validação",
                 JOptionPane.ERROR_MESSAGE);
             return;
