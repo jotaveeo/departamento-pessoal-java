@@ -14,6 +14,16 @@ public class CadastroFuncionario {
     }
 
     /**
+     * Verifica se já existe um funcionário cadastrado com o código informado.
+     *
+     * @param codigo Código a verificar
+     * @return true se existir, false caso contrário
+     */
+    public boolean existeFuncionario(int codigo) {
+        return funcionarios.containsKey(codigo);
+    }
+
+    /**
      * Cadastra um novo funcionário com seus dependentes.
      * 
      * @param codigo           Código único do funcionário

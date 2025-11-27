@@ -83,62 +83,144 @@ public class Main {
      */
     private static void cadastrarFuncionarioGUI(CadastroFuncionario cadastro) {
         try {
+            // Validação do código
             String codigoStr = JOptionPane.showInputDialog(null,
                     "Digite o código do funcionário:",
                     "Cadastrar Funcionário",
                     JOptionPane.QUESTION_MESSAGE);
             if (codigoStr == null)
                 return;
+
             int codigo = Integer.parseInt(codigoStr);
-
-            String nome = JOptionPane.showInputDialog(null,
-                    "Digite o nome do funcionário:",
-                    "Cadastrar Funcionário",
-                    JOptionPane.QUESTION_MESSAGE);
-            if (nome == null || nome.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Nome não pode ser vazio!",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
+            if (codigo <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Erro: Código deve ser maior que zero!",
+                        "Erro de Validação",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            String cargo = JOptionPane.showInputDialog(null,
-                    "Digite o cargo do funcionário:",
-                    "Cadastrar Funcionário",
-                    JOptionPane.QUESTION_MESSAGE);
-            if (cargo == null || cargo.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Cargo não pode ser vazio!",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
+            // Validação do nome
+            String nome = null;
+            while (nome == null || nome.trim().isEmpty() || !nome.matches("^[A-Za-zÀ-ÿ ]+$")) {
+                nome = JOptionPane.showInputDialog(null,
+                        "Digite o nome do funcionário:",
+                        "Cadastrar Funcionário",
+                        JOptionPane.QUESTION_MESSAGE);
+                if (nome == null)
+                    return;
+
+                if (nome.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Nome não pode ser vazio!",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
+                } else if (!nome.matches("^[A-Za-zÀ-ÿ ]+$")) {
+                    JOptionPane.showMessageDialog(null,
+                            "Nome inválido. Use apenas letras!",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             }
 
-            String salarioStr = JOptionPane.showInputDialog(null,
-                    "Digite o salário do funcionário:",
-                    "Cadastrar Funcionário",
-                    JOptionPane.QUESTION_MESSAGE);
-            if (salarioStr == null)
-                return;
-            double salario = Double.parseDouble(salarioStr);
+            // Validação do cargo
+            String cargo = null;
+            while (cargo == null || cargo.trim().isEmpty() || !cargo.matches("^[A-Za-zÀ-ÿ ]+$")) {
+                cargo = JOptionPane.showInputDialog(null,
+                        "Digite o cargo do funcionário:",
+                        "Cadastrar Funcionário",
+                        JOptionPane.QUESTION_MESSAGE);
+                if (cargo == null)
+                    return;
 
-            String qtdStr = JOptionPane.showInputDialog(null,
-                    "Digite a quantidade de dependentes:",
-                    "Cadastrar Funcionário",
-                    JOptionPane.QUESTION_MESSAGE);
-            if (qtdStr == null)
-                return;
-            int qtdDependentes = Integer.parseInt(qtdStr);
+                if (cargo.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Cargo não pode ser vazio!",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
+                } else if (!cargo.matches("^[A-Za-zÀ-ÿ ]+$")) {
+                    JOptionPane.showMessageDialog(null,
+                            "Cargo inválido. Use apenas letras!",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
+            // Validação do salário
+            double salario = -1;
+            while (salario <= 0) {
+                String salarioStr = JOptionPane.showInputDialog(null,
+                        "Digite o salário do funcionário:",
+                        "Cadastrar Funcionário",
+                        JOptionPane.QUESTION_MESSAGE);
+                if (salarioStr == null)
+                    return;
+
+                try {
+                    salario = Double.parseDouble(salarioStr);
+                    if (salario <= 0) {
+                        JOptionPane.showMessageDialog(null,
+                                "Salário deve ser maior que zero!",
+                                "Erro",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Erro: Digite um valor numérico válido!",
+                            "Erro de Entrada",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            // Validação da quantidade de dependentes
+            int qtdDependentes = -1;
+            while (qtdDependentes < 0) {
+                String qtdStr = JOptionPane.showInputDialog(null,
+                        "Digite a quantidade de dependentes:",
+                        "Cadastrar Funcionário",
+                        JOptionPane.QUESTION_MESSAGE);
+                if (qtdStr == null)
+                    return;
+
+                try {
+                    qtdDependentes = Integer.parseInt(qtdStr);
+                    if (qtdDependentes < 0) {
+                        JOptionPane.showMessageDialog(null,
+                                "Quantidade não pode ser negativa!",
+                                "Erro",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Erro: Digite um número inteiro válido!",
+                            "Erro de Entrada",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            // Validação dos nomes dos dependentes
             List<String> nomesDependentes = new ArrayList<>();
             for (int i = 0; i < qtdDependentes; i++) {
-                String nomeDep = JOptionPane.showInputDialog(null,
-                        "Digite o nome do dependente " + (i + 1) + ":",
-                        "Cadastrar Dependente",
-                        JOptionPane.QUESTION_MESSAGE);
-                if (nomeDep == null || nomeDep.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null,
-                            "Nome do dependente não pode ser vazio!",
-                            "Erro", JOptionPane.ERROR_MESSAGE);
-                    i--;
-                    continue;
+                String nomeDep = null;
+                while (nomeDep == null || nomeDep.trim().isEmpty() || !nomeDep.matches("^[A-Za-zÀ-ÿ ]+$")) {
+                    nomeDep = JOptionPane.showInputDialog(null,
+                            "Digite o nome do dependente " + (i + 1) + ":",
+                            "Cadastrar Dependente",
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (nomeDep == null)
+                        return;
+
+                    if (nomeDep.trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(null,
+                                "Nome do dependente não pode ser vazio!",
+                                "Erro",
+                                JOptionPane.ERROR_MESSAGE);
+                    } else if (!nomeDep.matches("^[A-Za-zÀ-ÿ ]+$")) {
+                        JOptionPane.showMessageDialog(null,
+                                "Nome inválido. Use apenas letras!",
+                                "Erro",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 nomesDependentes.add(nomeDep);
             }
@@ -147,7 +229,7 @@ public class Main {
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
-                    "Erro: Valor numérico inválido!\n" + e.getMessage(),
+                    "Erro inesperado: " + e.getMessage(),
                     "Erro de Entrada",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -189,19 +271,37 @@ public class Main {
                 return;
             int codigo = Integer.parseInt(codigoStr);
 
-            String salarioStr = JOptionPane.showInputDialog(null,
-                    "Digite o novo salário:",
-                    "Alterar Salário",
-                    JOptionPane.QUESTION_MESSAGE);
-            if (salarioStr == null)
-                return;
-            double novoSalario = Double.parseDouble(salarioStr);
+            // Validação do salário com loop
+            double novoSalario = -1;
+            while (novoSalario <= 0) {
+                String salarioStr = JOptionPane.showInputDialog(null,
+                        "Digite o novo salário:",
+                        "Alterar Salário",
+                        JOptionPane.QUESTION_MESSAGE);
+                if (salarioStr == null)
+                    return;
+
+                try {
+                    novoSalario = Double.parseDouble(salarioStr);
+                    if (novoSalario <= 0) {
+                        JOptionPane.showMessageDialog(null,
+                                "Salário deve ser maior que zero!",
+                                "Erro",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "Erro: Digite um valor numérico válido!",
+                            "Erro de Entrada",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
             cadastro.alterarSalarioFuncionario(codigo, novoSalario);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
-                    "Erro: Valor numérico inválido!",
+                    "Erro: Código inválido!",
                     "Erro de Entrada",
                     JOptionPane.ERROR_MESSAGE);
         }
