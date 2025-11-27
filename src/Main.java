@@ -20,8 +20,8 @@ public class Main {
                     "6 - Sair\n\n" +
                     "Escolha uma opção:";
 
-            String inputOpcao = JOptionPane.showInputDialog(null, menu,
-                    "Menu Principal", JOptionPane.QUESTION_MESSAGE);
+            String inputOpcao = JOptionPane.showInputDialog(null, menu, 
+                    "Menu Principal", JOptionPane.QUESTION_MESSAGE); 
 
             // Se o usuário cancelar ou fechar a janela
             if (inputOpcao == null) {
@@ -83,7 +83,7 @@ public class Main {
      */
     private static void cadastrarFuncionarioGUI(CadastroFuncionario cadastro) {
         // Validar cada campo individualmente. Se o usuário inserir um valor inválido,
-        // mostramos mensagem em português e repetimos a solicitação para o mesmo campo.
+        // mostramos mensagem e repetimos a solicitação para o mesmo campo.
         // Se o usuário pressionar Cancelar (input == null), retornamos ao menu.
 
         // Código (inteiro)
@@ -96,7 +96,7 @@ public class Main {
             if (codigoStr == null) // cancelar
                 return;
             try {
-                codigo = Integer.parseInt(codigoStr.trim());
+                codigo = Integer.parseInt(codigoStr.trim()); // remover espaços
                 if (codigo <= 0) {
                     JOptionPane.showMessageDialog(null,
                             "Código deve ser um número inteiro maior que zero.",

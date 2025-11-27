@@ -1,16 +1,16 @@
-import java.io.*;
-import java.util.*;
-import javax.swing.JOptionPane;
+import java.io.*; // para FileWriter, BufferedWriter, IOException
+import java.util.*; // para Map, HashMap, List
+import javax.swing.JOptionPane; // para JOptionPane
 
 /**
  * Classe responsável pelo gerenciamento do cadastro de funcionários.
  * Implementa operações de CRUD e cálculo de bônus.
  */
 public class CadastroFuncionario {
-    private Map<Integer, Funcionario> funcionarios;
+    private Map<Integer, Funcionario> funcionarios; // mapa de funcionários, chave é o código
 
     public CadastroFuncionario() {
-        funcionarios = new HashMap<>();
+        funcionarios = new HashMap<>(); // inicializa o mapa de funcionários
     }
 
     /**
@@ -57,9 +57,9 @@ public class CadastroFuncionario {
             return;
         }
         Funcionario novoFuncionario = new Funcionario(codigo, nome, cargo, salario);
-        for (String nomeDependente : nomesDependentes) {
+        for (String nomeDependente : nomesDependentes) { 
             Dependente dependente = new Dependente(novoFuncionario, nomeDependente);
-            novoFuncionario.adicionarDependente(dependente);
+            novoFuncionario.adicionarDependente(dependente); 
         }
         funcionarios.put(codigo, novoFuncionario);
         JOptionPane.showMessageDialog(null,
